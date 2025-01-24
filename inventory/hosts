@@ -1,9 +1,9 @@
 [db]
-db_vm ansible_host=192.168.56.101
+database ansible_host=192.168.56.101
 
 [app]
-app_vm_1 ansible_host=192.168.56.102
-app_vm_2 ansible_host=192.168.56.103
+app_instance_1 ansible_host=192.168.56.102
+app_instance_2 ansible_host=192.168.56.103
 
 [web]
-web_vm ansible_host=192.168.56.104
+load_balancer ansible_host=192.168.56.104
