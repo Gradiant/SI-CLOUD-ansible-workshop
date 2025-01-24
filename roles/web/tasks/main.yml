@@ -1,0 +1,36 @@
+---
+- name: Install Nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: Configure Nginx
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx
+
+- name: Allow Nginx to connect to the network (SELinux)
+  ansible.builtin.command:
+    cmd: setsebool -P httpd_can_network_connect 1
+
+- name: Open port 80 in the firewall
+  ansible.builtin.firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Reload firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
+
+- name: Start and enable Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: true

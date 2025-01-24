@@ -1,0 +1,3 @@
+db_name: goapp_db
+db_user: goapp_user
+db_password: securepassword

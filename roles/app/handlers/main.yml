@@ -1,0 +1,9 @@
+---
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart Go application service
+  ansible.builtin.systemd:
+    name: goapp
+    state: restarted

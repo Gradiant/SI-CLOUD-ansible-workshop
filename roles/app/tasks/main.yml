@@ -1,0 +1,46 @@
+---
+- name: Create application directory
+  ansible.builtin.file:
+    path: /opt/goapp
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Copy precompiled Go binary
+  ansible.builtin.copy:
+    src: files/app
+    dest: /opt/goapp/app
+    owner: root
+    group: root
+    mode: '0755'
+  notify: Restart Go application service
+
+- name: Configure systemd service for Go application
+  ansible.builtin.template:
+    src: app.service.j2
+    dest: /etc/systemd/system/goapp.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Reload systemd daemon
+    - Restart Go application service
+
+- name: Ensure firewalld is installed
+  ansible.builtin.yum:
+    name: firewalld
+    state: present
+
+- name: Start and enable firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Open application port in the firewall
+  ansible.builtin.firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+    immediate: true

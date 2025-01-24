@@ -1,0 +1,44 @@
+---
+- name: Install MariaDB
+  ansible.builtin.yum:
+    name: mariadb-server
+    state: present
+
+- name: Install Python MySQL bindings
+  ansible.builtin.yum:
+    name: python3-mysqlclient
+    state: present
+
+- name: Start and enable MariaDB service
+  ansible.builtin.systemd:
+    name: mariadb
+    state: started
+    enabled: true
+
+- name: Configure MariaDB to listen on all interfaces
+  ansible.builtin.lineinfile:
+    path: /etc/my.cnf.d/mariadb-server.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    state: present
+  notify: Restart MariaDB
+
+- name: Open port 3306 in the firewall
+  ansible.builtin.firewalld:
+    port: 3306/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Ensure database exists
+  ansible.builtin.mysql_db:
+    name: "{{ db_name }}"
+    state: present
+
+- name: Create database user
+  ansible.builtin.mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
+    host: "%"
+    state: present
