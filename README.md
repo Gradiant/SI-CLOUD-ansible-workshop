@@ -44,6 +44,18 @@ Para añadir nuevas entradas con el *timestamp* a la base de datos, puedes usar 
 curl -X POST 192.168.56.104/save
 ```
 
+
+## Documentos de ayuda
+Puedes usar el documento [introduccion-a-ansible.pdf](.docs/introduccion-a-ansible.pdf) adjunto a este repositorio para una pequeña introducción formal a Ansible. Este es un documento introductorio a la tecnología que no debe reemplazar en ningún caso el uso de la documentación oficial.
+
+## Documentación oficial
+- Ansible - https://docs.ansible.com/
+- Vagrant - https://developer.hashicorp.com/vagrant/docs
+- Virtual Box - https://www.virtualbox.org/manual/
+- Curl - https://curl.se/
+- OpenSSH - https://www.openssh.com/manual.html
+
+
 ---
 
 **_This project was developed by [Gradiant](https://www.gradiant.org)._**
