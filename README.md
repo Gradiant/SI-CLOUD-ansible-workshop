@@ -1,4 +1,4 @@
-# Demo Ansible
+# SI-CLOUD-ansible-workshop
 
 ## Introducción
 La siguiente demo tiene como objetivo desplegar una aplicación sencilla en Go sobre la arquitectura mostrada en la siguiente imagen:​ ​ 
@@ -31,6 +31,14 @@ Puedes inicar el despliegue de la aplicación sobre los nodos ya desplegados con
 ansible-playbook site.yml
 ```
 
+Puedes limpiar tu entorno destruyendo las máquinas virtuales desplegadas con el comando:
+```
+vagrant destroy -f
+```
+y eliminando el directorio `.vagrant` creado en el directorio de proyecto con el comando:
+```
+rm -rf .vagrant
+```
 
 ## Pruebas
 
@@ -46,7 +54,10 @@ curl -X POST 192.168.56.104/save
 
 
 ## Documentos de ayuda
-Puedes usar el documento [introduccion-a-ansible.pdf](.docs/introduccion-a-ansible.pdf) adjunto a este repositorio para una pequeña introducción formal a Ansible. Este es un documento introductorio a la tecnología que no debe reemplazar en ningún caso el uso de la documentación oficial.
+- Puedes usar el documento [introduccion-a-ansible.pdf](.docs/introduccion-a-ansible.pdf) adjunto a este repositorio para una pequeña introducción formal a Ansible.
+- Puedes usar la [presentacion-ansible.pdf](.docs/presentacion-ansible.pdf) adjunta a este repositorio para una introducción más gráfica a Ansible.
+
+Esta documentación de ayuda es introductorio a la tecnología y no debe reemplazar en ningún caso el uso de la documentación oficial.
 
 ## Documentación oficial
 - Ansible - https://docs.ansible.com/
